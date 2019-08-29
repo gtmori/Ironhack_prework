@@ -157,20 +157,29 @@ function moveBackward(rovers){
 function listCommands(commands){
   console.log("listCommands was called");
   listCommandActivate = true;
+  let validation = true;
+  
   for (let i = 0; i < commands.length; i++) {
-    if (commands[i] !== "r" && commands[i] !== "l" && commands[i] !== "f" && commands[i] !== "b") {
+    if (commands[i] !== "r" && commands[i] !== "l" && commands[i] !== "f" && commands[i] !== "b") {      
+      validation = false;
       console.log (`${commands[i]} is not a valid command! Put another command`);
-      break;
-    } else if (commands[i] === "r") {
-      turnRight(rovers);
-    } else if (commands[i] === "l") {
-      turnLeft(rovers);
-    } else if (commands[i] === "f") {
-      moveForward(rovers);
-    } else if (commands[i] === "b") {
-      moveBackward(rovers);
-    } 
+    }
   }
+  
+    if (validation) {
+      for (let i = 0; i < commands.length; i++) {  
+        if (commands[i] === "r") {
+          turnRight(rovers);
+        } else if (commands[i] === "l") {
+        turnLeft(rovers);
+        } else if (commands[i] === "f") {
+          moveForward(rovers);
+        } else if (commands[i] === "b") {
+          moveBackward(rovers);
+        }
+      }
+    }
+  
   console.log(`Places that the rover has traveled: ${rovers[round].travelLog}`);
   listCommandActivate = false;
   roundRover();
